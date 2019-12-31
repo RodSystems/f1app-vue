@@ -1,7 +1,7 @@
 <template>
-  <div class="painel">
-    <h2 class="painel-titulo">{{titulo}}</h2>
-    <slot class="painel-corpo">
+  <div class="lista">
+    <h2 class="lista-titulo">{{titulo}}</h2>
+    <slot class="lista-corpo">
       
     </slot>
   </div>
@@ -18,7 +18,7 @@ export default {
 .imagem-responsiva {
   width: 100%;
 }
-.painel {
+.lista {
   padding: 0 auto;
   border: solid 1px grey;
   display: inline-block;
@@ -29,7 +29,7 @@ export default {
   vertical-align: top;
   text-align: center;
 }
-.painel .painel-titulo {
+.lista .lista-titulo {
   font-size: 14px;
   text-align: center;
   border-bottom: solid 1px grey;

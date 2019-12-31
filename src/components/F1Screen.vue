@@ -11,9 +11,28 @@
     {{filtro}}
     <ul class="lista-pilotos">
       <li v-for="pilotos of pilotoComFiltro" v-bind:key="pilotos.driverId" class="lista-pilotos-item">
-        <meu-painel :titulo="foto.first_name">
-          <label class="imagem-responsiva" :text="pilotos.driverId"></label>
-        </meu-painel>
+        <minha-lista :titulo="pilotos.driverId">
+          <div>
+            <p>
+                Nome:<span>{{pilotos.givenName}}&nbsp;{{pilotos.familyName}}</span>
+            </p>
+          </div>
+          <div>
+            <p>
+                Número:<span>{{pilotos.permanentNumber}}</span>
+            </p>
+          </div>
+           <div>
+            <p>
+                Nascimento:<span>{{pilotos.dateOfBirth}}</span>
+            </p>
+          </div>
+           <div>
+            <p>
+                Nacionalidade:<span>{{pilotos.nationality}}</span>
+            </p>
+          </div>
+        </minha-lista>
       </li>
     </ul>
   </div>
@@ -24,7 +43,7 @@ import axios from "axios";
 import Lista from "./shared/lista/Lista";
 export default {
   components: {
-    "meu-painel": Lista
+    "minha-lista": Lista
   },
   name: "F1Screen",
   computed: {
@@ -35,7 +54,7 @@ export default {
         return this.pilotos.filter(pilotos => exp.test(pilotos.driverId));
       } else {
         // se o campo estiver vazio, não filtramos, retornamos a lista
-        return this.pilotos;
+        return this.pilotos.driverId;
       }
     }
   },
