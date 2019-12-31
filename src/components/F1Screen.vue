@@ -58,11 +58,11 @@ export default {
       }
     }
   },
-  created() {
-    axios
-      .get("https://ergast.com/api/f1/2019/drivers.json")
+  mounted: function() {
+    this.axios
+      .get("https://ergast.com/api/f1/2019/drivers")
       .then(response => {
-        this.pilotos = response.MRData.DriverTable.Drivers;
+        return this.pilotos = response.MRData.DriverTable.Drivers;
       })
       .catch(e => {
         this.erros.push(e);
