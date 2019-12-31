@@ -8,7 +8,6 @@
       class="filtro"
       placeholder="filtre pelo piloto"
     />
-    {{filtro}}
     <ul class="lista-pilotos">
       <li v-for="pilotos of pilotoComFiltro" v-bind:key="pilotos.driverId" class="lista-pilotos-item">
         <minha-lista :titulo="pilotos.driverId">
@@ -54,15 +53,16 @@ export default {
         return this.pilotos.filter(pilotos => exp.test(pilotos.driverId));
       } else {
         // se o campo estiver vazio, não filtramos, retornamos a lista
-        return this.pilotos.driverId;
+        return this.pilotos;
       }
     }
   },
-  created() {
+  mounted() {
     axios
       .get("https://ergast.com/api/f1/2019/drivers.json")
       .then(response => {
-        this.pilotos = response.MRData.DriverTable.Drivers;
+        // alert(response.MRData.DriverTable.season);
+        this.pilotos = response.data.MRData.DriverTable.Drivers;
       })
       .catch(e => {
         this.erros.push(e);
