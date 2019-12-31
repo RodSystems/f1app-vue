@@ -15,27 +15,26 @@ export default {
 
 <style scoped>
 /* estilo do painel */
-.imagem-responsiva {
-  width: 100%;
-}
 .lista {
   padding: 0 auto;
-  border: solid 1px grey;
   display: inline-block;
-  margin: 0 10px;
+  margin: 20px;
   box-shadow: 2px 2px 10px grey;
-  width: 150px;
+  width: 250px;
   height: 100%;
   vertical-align: top;
   text-align: center;
 }
 .lista .lista-titulo {
-  font-size: 14px;
+  font-size: 20px;
   text-align: center;
   border-bottom: solid 1px grey;
-  background: mediumspringgreen;
+  background: #333;
+  color: #F1F1F1;
   margin: 0;
   padding: 10px;
   text-transform: uppercase;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
 }
 </style>

@@ -6,29 +6,23 @@
       type="search"
       v-on:input="filtro = $event.target.value"
       class="filtro"
-      placeholder="filtre pelo piloto"
+      placeholder="Filtre pelo piloto"
     />
     <ul class="lista-pilotos">
       <li v-for="pilotos of pilotoComFiltro" v-bind:key="pilotos.driverId" class="lista-pilotos-item">
-        <minha-lista :titulo="pilotos.driverId">
+        <minha-lista :titulo="formatDriverID(pilotos.driverId)">
           <div>
             <p>
-                Nome:<span>{{pilotos.givenName}}&nbsp;{{pilotos.familyName}}</span>
+                <b>Nome:</b> <span>{{pilotos.givenName}}&nbsp;{{pilotos.familyName}}</span>
             </p>
-          </div>
-          <div>
             <p>
-                Número:<span>{{pilotos.permanentNumber}}</span>
+                <b>Número:</b> <span>{{pilotos.permanentNumber}}</span>
             </p>
-          </div>
-           <div>
             <p>
-                Nascimento:<span>{{pilotos.dateOfBirth}}</span>
+                <b>Nascimento:</b> <span>{{ formatDate(pilotos.dateOfBirth) }}</span>
             </p>
-          </div>
-           <div>
             <p>
-                Nacionalidade:<span>{{pilotos.nationality}}</span>
+                <b>Nacionalidade:</b> <span>{{pilotos.nationality}}</span>
             </p>
           </div>
         </minha-lista>
@@ -73,6 +67,12 @@ export default {
         .split("")
         .reverse()
         .join("");
+    },
+    formatDate(date) {
+      return date.split('-').reverse().join('/')
+    },
+    formatDriverID(driverId) { 
+      return driverId.replace('_',' ')
     }
   },
   data() {
@@ -93,6 +93,7 @@ export default {
 <style scoped>
 .centralizado {
   text-align: center;
+  color: #333;
 }
 .corpo {
   font-family: Helvetica, Arial, sans-serif;
@@ -109,5 +110,7 @@ export default {
 .filtro {
   display: block;
   width: 100%;
+  height: 50px;
+  font-size: 25px;
 }
 </style>
