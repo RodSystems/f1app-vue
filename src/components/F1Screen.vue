@@ -61,7 +61,6 @@ export default {
     axios
       .get("https://ergast.com/api/f1/2019/drivers.json")
       .then(response => {
-        // alert(response.MRData.DriverTable.season);
         this.pilotos = response.data.MRData.DriverTable.Drivers;
       })
       .catch(e => {
