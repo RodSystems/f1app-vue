@@ -26,7 +26,7 @@ export default {
   text-align: center;
 }
 .lista .lista-titulo {
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   border-bottom: solid 1px grey;
   background: #333;

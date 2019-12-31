@@ -2,6 +2,13 @@
   <div class="corpo">
     <h1 class="centralizado">{{ msg }}</h1>
     <h2>{{ titulo }}</h2>
+
+    <select class="filtroAnos" name="filtroAnos" v-model="anoSelecionado" v-on:change="mudarAno">
+      <option v-for="ano of anosNoFiltro" v-bind:key="ano" :value="ano" :selected="ano === anoSelecionado">
+        {{ano}}
+      </option>
+    </select>
+
     <input
       type="search"
       v-on:input="filtro = $event.target.value"
@@ -49,19 +56,26 @@ export default {
         // se o campo estiver vazio, não filtramos, retornamos a lista
         return this.pilotos;
       }
+    }, 
+    anosNoFiltro() {
+      // Retorna um Array de Anos de 1950 até 2019 (Range da Api)
+      return [...Array(70).keys()].map((e)=>e+1950,this).reverse();
     }
   },
   mounted() {
-    axios
-      .get("https://ergast.com/api/f1/2019/drivers.json")
-      .then(response => {
-        this.pilotos = response.data.MRData.DriverTable.Drivers;
-      })
-      .catch(e => {
-        this.erros.push(e);
-      });
+    this.fetchData();
   },
   methods: {
+    fetchData(){
+      axios
+        .get(`https://ergast.com/api/f1/${this.anoSelecionado}/drivers.json`)
+        .then(response => {
+          this.pilotos = response.data.MRData.DriverTable.Drivers;
+        })
+        .catch(e => {
+          this.erros.push(e);
+        });
+    },
     reverseMessage() {
       this.titulo = this.titulo
         .split("")
@@ -73,15 +87,20 @@ export default {
     },
     formatDriverID(driverId) { 
       return driverId.replace('_',' ')
+    },
+    mudarAno(e){
+      this.anoSelecionado = e.target.options[e.target.selectedIndex].text;
+      this.fetchData();
     }
   },
   data() {
     return {
       filtro: "",
       message: "Olá usuário",
+      anoSelecionado: "2019",
       erros: [],
       pilotos: [],
-      titulo: "Filtre pelo piloto"
+      titulo: "Selecione o ano e filtre pelos pilotos"
     };
   },
   props: {
@@ -108,9 +127,16 @@ export default {
   display: inline-block;
 }
 .filtro {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: 500px;
   height: 50px;
   font-size: 25px;
+  margin-left: 20px;
+}
+.filtroAnos {
+  display: inline-block;
+  height: 40px;
+  width: 80px;
+  font-size: 20px;
 }
 </style>
