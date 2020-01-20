@@ -16,9 +16,13 @@ Link do Projeto:
 https://github.com/RodSystems/f1app-vue
 
 Criar uma cópia de trabalho para um repositório local executando o comando:
+```
 git clone https://github.com/RodSystems/f1app-vue
+```
 
 Dentro da pasta onde foi clonado o projeto executar os comandos:
+```
 npm install
 
 npm run serve
+```
